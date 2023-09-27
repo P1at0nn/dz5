@@ -6,8 +6,8 @@ class MainKtTest {
 
     @Test
     fun add() {
-        val postnew = Post(0)
-        val postnew1 = Post(0)
+        val postnew = Post(iD=0, text = "qwer", comments = Comments(1), Likes(1),null)
+        val postnew1 = Post(iD=0, text = "qwer", comments = Comments(1), Likes(1),null)
         WallService.add(postnew)
         WallService.add(postnew1)
         val result =
