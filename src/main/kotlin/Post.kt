@@ -11,17 +11,12 @@ data class Post(
     val is_favorite: Boolean? = null,
     val attachment :Array<Attachment> = emptyArray()
 )
- interface Attachment{
-
-    val type : String
-
-
-}
+ sealed class Attachment()
 data class AudioAttachment(
     val audio: Audio
 
-):Attachment{
-    override val type: String ="audio"
+):Attachment(){
+     val type: String ="audio"
 
 }
 data class Audio(
@@ -37,8 +32,8 @@ data class PhotoAttachment(
     val photo : Photo,
 
 
-):Attachment{
-    override val type: String = "photo"
+):Attachment(){
+     val type: String = "photo"
 
 
 }
@@ -52,8 +47,8 @@ data class Photo(
 }
 data class VideoAttachment(
     val video: Video
-):Attachment{
-    override val type: String = "video"
+):Attachment(){
+     val type: String = "video"
 
 }
 data class Video(
@@ -65,8 +60,8 @@ data class Video(
 )
 data class DocAttachment(
     val doc:Doc
-):Attachment{
-    override  val type :String = "doc"
+):Attachment(){
+      val type :String = "doc"
 }
 data class Doc(
     val id:Int,
@@ -76,8 +71,8 @@ data class Doc(
 )
 data class NoteAtachment(
     val note:Note
-):Attachment{
-    override  val   type:String ="note"
+):Attachment(){
+      val   type:String ="note"
 }
 data class Note(
     val id:Int,
@@ -87,8 +82,8 @@ data class Note(
 )
 data class EventAtachment(
     val event:Event
-):Attachment{
-    override val type:String ="event"
+):Attachment(){
+     val type:String ="event"
 }
 data class Event(
     val id:Int,
@@ -98,5 +93,25 @@ data class Event(
     val is_favorite: Boolean
 )
 
+
+fun PrintAttachment(post:Post){
+
+    var first = post.attachment[0]
+    for (index in post.attachment.indices){
+        var t = post.attachment[index]
+        println(t)
+        first  = t
+
+    }
+
+    when (first) {
+        is  PhotoAttachment-> println("Фото")
+        is VideoAttachment -> println( "Видео")
+        is EventAtachment -> println("Встреча")
+        is DocAttachment -> println("Документ")
+        is NoteAtachment -> println("заметка")
+        is AudioAttachment -> println("Аудио")
+    }
+}
 
 

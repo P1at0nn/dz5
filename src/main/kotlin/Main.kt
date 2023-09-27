@@ -65,4 +65,5 @@ fun main() {
     WallService.printPost()
     WallService.update(Post(1, "update",comments  = Comments(1,true,true,true), date = 12132022))
     WallService.printPost()
+    PrintAttachment(post1)
 }
