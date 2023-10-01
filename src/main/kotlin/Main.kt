@@ -3,7 +3,8 @@ import kotlin.coroutines.coroutineContext
 
 object WallService {
     var posts = emptyArray<Post>()
-    private var comments = emptyArray<Comments>()
+    var comments = emptyArray<Comments>()
+    var reportComment = emptyArray<Report>()
     var lastID = 0
 
     fun add(post: Post): Post {
@@ -40,19 +41,46 @@ object WallService {
 
                 WallService.comments += comments
 
-            } else throw PostNotFoundException("пост с данным id не найден")
+            } else  throw PostNotFoundException("пост с данным id не найден")
 
 
         }
 
         return comments
     }
+
+
+    fun reportComment(report: Report): Int {        // жалоба
+
+        for ((index, comment) in comments.withIndex()) {
+
+            if (comment.id == report.comment_id ) {
+                if(report.reason in 0..8 && report.reason != 7) {
+                    WallService.reportComment += report
+                    println("жалоба добавлена ")
+                    when (report.reason) {
+                        0 -> println("спам")
+                        1 -> println("детская порнография")
+                        2 -> println("экстремизм")
+                        3 -> println("насилие")
+                        4 -> println("пропаганда наркотиков")
+                        5 -> println("материал для взрослых")
+                        6 -> println(" оскорбление")
+                        8 -> println("призывы к суициду")
+                    }
+                }else  throw ReasonNotFoundException("неверная причина жалабы (reason)")
+            } else  throw IdNotFoundException("неверный ID")
+
+        }
+        return 1
+    }
+
 }
 
 fun main() {
 
     var post = Post(
-        iD = 1,
+        iD = 2,
         text = "text",
         Comments(1),
         Likes(1),
@@ -64,14 +92,14 @@ fun main() {
     )
 
 
-    var post1: Post = Post(
-        2,
-        "textT",
-        Comments(1),
-        Likes(1),
-        date = 12112022,
-        attachment = arrayOf(VideoAttachment(Video(id = 1, photo_130 = "text", photo_604 = "TEXT")))
-    )    // owner_id :  по дефолту прописан
+//    var post1: Post = Post(
+//        222,
+//        "textT",
+//        Comments(2),
+//        Likes(1),
+//        date = 12112022,
+//        attachment = arrayOf(VideoAttachment(Video(id = 1, photo_130 = "text", photo_604 = "TEXT")))
+//    )    // owner_id :  по дефолту прописан
 
 //    var post2: Post = Post(
 //        2,
@@ -81,20 +109,27 @@ fun main() {
 //        date = 12112022,
 //        attachment = arrayOf(AudioAttachment( Audio(1,"audio","text","TEXT"))))
 
-    WallService.add(post)
-    // WallService.add(post1)
-    //  WallService.add(post2)
-    //   WallService.printPost()
-    //  WallService.update(Post(1, "update",comments  = Comments(1,true,true,true), date = 12132022))
-    WallService.printPost()
-    //   PrintAttachment(post1)
-
+    println(WallService.add(post))
+//     WallService.add(post1)
+//    //  WallService.add(post2)
+//    //   WallService.printPost()
+//    //  WallService.update(Post(1, "update",comments  = Comments(1,true,true,true), date = 12132022))
+//    WallService.printPost()
+//    //   PrintAttachment(post1)
+//    println("`1````````````````````````````````````````````")
     WallService.createComment(
-        567,
-        comments = Comments(16, 1234, 120122023, arrayOf(VideoAttachment(Video(1, "Video", "http:", "http:"))))
+        1,
+        comments = Comments(33, 1234, 120122023, arrayOf(VideoAttachment(Video(1, "Video", "http:", "http:"))))
     )
-    //  WallService.printPost()
-    WallService.printComment()
+//    //  WallService.printPost()
+//    println("`````````````````````````````````````````````")
+//    WallService.printComment()
+//    println("`````````````````````````````````````````````")
+//    WallService.printPost()
+    println("`4````````````````````````````````````````````")
+    println(WallService.comments[0])
 
+    println(WallService.reportComment(report = Report(33, 33, 7)))// передаем созданную жалобу
 
+   // println(WallService.reportComment[0])
 }

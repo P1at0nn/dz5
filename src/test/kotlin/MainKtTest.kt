@@ -69,6 +69,29 @@ class MainKtTest {
 
 
     }
+    @Test(expected = IdNotFoundException::class)
+    fun shouldThrow2() {
+        val service = WallService
+        service.add(Post(1, "text"))
+        val comments: Comments = Comments(4, 123)
+        WallService.createComment(1, comments)
+        val report:Report = Report(1,6,1)
+        WallService.reportComment(report)
+
+
+    }
+    @Test(expected = ReasonNotFoundException::class)
+    fun shouldThrow3() {
+        val service = WallService
+        service.add(Post(1, "text"))
+        val comments: Comments = Comments(4, 123)
+
+        WallService.createComment(1, comments)
+        val report:Report = Report(1,4,7)
+        WallService.reportComment(report)
+
+
+    }
 
 
 }
