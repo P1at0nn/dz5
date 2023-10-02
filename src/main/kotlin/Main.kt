@@ -17,7 +17,7 @@ object WallService {
         for ((index, post) in posts.withIndex()) {
             if (post.iD == newpost.iD) {
                 posts[index] = newpost.copy()
-                println("tryy")
+
                 return true
             }
         }
@@ -92,14 +92,14 @@ fun main() {
     )
 
 
-//    var post1: Post = Post(
-//        222,
-//        "textT",
-//        Comments(2),
-//        Likes(1),
-//        date = 12112022,
-//        attachment = arrayOf(VideoAttachment(Video(id = 1, photo_130 = "text", photo_604 = "TEXT")))
-//    )    // owner_id :  по дефолту прописан
+    var post1: Post = Post(
+        222,
+        "textT",
+        Comments(2),
+        Likes(1),
+        date = 12112022,
+        attachment = arrayOf(VideoAttachment(Video(id = 1, photo_130 = "text", photo_604 = "TEXT")))
+    )    // owner_id :  по дефолту прописан
 
 //    var post2: Post = Post(
 //        2,
@@ -117,19 +117,17 @@ fun main() {
 //    WallService.printPost()
 //    //   PrintAttachment(post1)
 //    println("`1````````````````````````````````````````````")
-    WallService.createComment(
-        1,
-        comments = Comments(33, 1234, 120122023, arrayOf(VideoAttachment(Video(1, "Video", "http:", "http:"))))
-    )
+   println( WallService.createComment(1, comments = Comments(33, 1234, 120122023, arrayOf(VideoAttachment(Video(1, "Video", "http:", "http:"))))
+    ))
 //    //  WallService.printPost()
 //    println("`````````````````````````````````````````````")
 //    WallService.printComment()
 //    println("`````````````````````````````````````````````")
-//    WallService.printPost()
+   WallService.printPost()
     println("`4````````````````````````````````````````````")
     println(WallService.comments[0])
 
-    println(WallService.reportComment(report = Report(33, 33, 7)))// передаем созданную жалобу
+    println(WallService.reportComment(report = Report(33, 33, 5)))// передаем созданную жалобу
 
    // println(WallService.reportComment[0])
 }

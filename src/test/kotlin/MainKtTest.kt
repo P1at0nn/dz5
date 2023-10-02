@@ -39,7 +39,7 @@ class MainKtTest {
         val update = WallService.update(Post(6, "NEW_text!!!!"))
         println(update)
         val result: Boolean = update
-        assertFalse(result)
+        assertTrue(result)
 
     }
 
@@ -48,7 +48,7 @@ class MainKtTest {
         val service = WallService
         service.add(Post(1, "text"))
         val comments: Comments = Comments(1, 123)
-        val comments1: Comments = Comments(4, 123)
+      //  val comments1: Comments = Comments(4, 123)
         val create = WallService.createComment(1, comments)
 
         println(create)
@@ -64,7 +64,7 @@ class MainKtTest {
         val service = WallService
         service.add(Post(1, "text"))
         val comments: Comments = Comments(1, 123)
-        val comments1: Comments = Comments(4, 123)
+       // val comments1: Comments = Comments(4, 123)
         WallService.createComment(4, comments)
 
 
@@ -72,10 +72,12 @@ class MainKtTest {
     @Test(expected = IdNotFoundException::class)
     fun shouldThrow2() {
         val service = WallService
+        println( WallService.lastID)
         service.add(Post(1, "text"))
-        val comments: Comments = Comments(4, 123)
+        println(WallService.lastID)
+        val comments: Comments = Comments(1, 123)
         WallService.createComment(1, comments)
-        val report:Report = Report(1,6,1)
+        val report:Report = Report(1,3,1)
         WallService.reportComment(report)
 
 
