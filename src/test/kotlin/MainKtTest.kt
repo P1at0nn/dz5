@@ -62,7 +62,7 @@ class MainKtTest {
     @Test(expected = PostNotFoundException::class)
     fun shouldThrow() {
         val service = WallService
-        service.add(Post(1, "text"))
+        service.add(Post(2, "text"))
         val comments: Comments = Comments(1, 123)
        // val comments1: Comments = Comments(4, 123)
         WallService.createComment(4, comments)
@@ -72,9 +72,9 @@ class MainKtTest {
     @Test(expected = IdNotFoundException::class)
     fun shouldThrow2() {
         val service = WallService
-        println( WallService.lastID)
+       // println( WallService.lastID)
         service.add(Post(1, "text"))
-        println(WallService.lastID)
+        //println(WallService.lastID)
         val comments: Comments = Comments(1, 123)
         WallService.createComment(1, comments)
         val report:Report = Report(1,3,1)
@@ -89,7 +89,7 @@ class MainKtTest {
         val comments: Comments = Comments(4, 123)
 
         WallService.createComment(1, comments)
-        val report:Report = Report(1,4,7)
+        val report:Report = Report(1,4,12)
         WallService.reportComment(report)
 
 

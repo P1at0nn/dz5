@@ -76,9 +76,9 @@ data class NoteAtachment(
 }
 data class Note(
     val id:Int,
-    val owner_id:String,
-    val photo_130:String,
-    val photo_604:String
+    val owner_id:String = "null",
+    val photo_130:String ="null",
+    val photo_604:String ="null"
 )
 data class EventAtachment(
     val event:Event
