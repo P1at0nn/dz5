@@ -7,6 +7,13 @@ object WallService {
     var reportComment = emptyArray<Report>()
     var lastID = 0
 
+
+     fun clear(){
+         posts = emptyArray()
+         comments = emptyArray()
+         reportComment = emptyArray()
+         lastID = 0
+     }
     fun add(post: Post): Post {
 
         posts += post.copy(iD = ++lastID)

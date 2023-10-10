@@ -1,9 +1,15 @@
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
 import kotlin.test.expect
 
 class MainKtTest {
+
+    @Before
+    fun clearBeforeTest(){
+        WallService.clear()
+    }
 
     @Test
     fun add() {
@@ -36,7 +42,7 @@ class MainKtTest {
         service.add(Post(1, "text"))
         service.add(Post(2, "text2"))
         service.add(Post(3, "text3"))
-        val update = WallService.update(Post(6, "NEW_text!!!!"))
+        val update = WallService.update(Post(1, "NEW_text!!!!"))
         println(update)
         val result: Boolean = update
         assertTrue(result)
@@ -65,7 +71,7 @@ class MainKtTest {
         service.add(Post(2, "text"))
         val comments: Comments = Comments(1, 123)
        // val comments1: Comments = Comments(4, 123)
-        WallService.createComment(4, comments)
+        WallService.createComment(11, comments)
 
 
     }
